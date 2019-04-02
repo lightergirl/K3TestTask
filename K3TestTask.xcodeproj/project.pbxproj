@@ -12,6 +12,12 @@
 		340CCEE5224CE88100BBEFCD /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 340CCEE3224CE88100BBEFCD /* Main.storyboard */; };
 		340CCEE7224CE88400BBEFCD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 340CCEE6224CE88400BBEFCD /* Assets.xcassets */; };
 		340CCEEA224CE88400BBEFCD /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 340CCEE8224CE88400BBEFCD /* LaunchScreen.storyboard */; };
+		340CCEF8224D0ED800BBEFCD /* PostTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 340CCEF7224D0ED800BBEFCD /* PostTableViewCell.swift */; };
+		340CCEFA224D16D300BBEFCD /* APIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 340CCEF9224D16D300BBEFCD /* APIManager.swift */; };
+		340CCEFC224D250400BBEFCD /* TumblrResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 340CCEFB224D250400BBEFCD /* TumblrResponse.swift */; };
+		340CCEFE224D380700BBEFCD /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = 340CCEFD224D380700BBEFCD /* Post.swift */; };
+		340CCF0022528A9E00BBEFCD /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 340CCEFF22528A9E00BBEFCD /* DetailViewController.swift */; };
+		42FE3E833C0A69E4B25ADB8D /* Pods_K3TestTask.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E6CF42C90E2688F40D55AD5D /* Pods_K3TestTask.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -22,6 +28,14 @@
 		340CCEE6224CE88400BBEFCD /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		340CCEE9224CE88400BBEFCD /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		340CCEEB224CE88400BBEFCD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		340CCEF7224D0ED800BBEFCD /* PostTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostTableViewCell.swift; sourceTree = "<group>"; };
+		340CCEF9224D16D300BBEFCD /* APIManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIManager.swift; sourceTree = "<group>"; };
+		340CCEFB224D250400BBEFCD /* TumblrResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TumblrResponse.swift; sourceTree = "<group>"; };
+		340CCEFD224D380700BBEFCD /* Post.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
+		340CCEFF22528A9E00BBEFCD /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
+		91CB4F13467071D708A5373B /* Pods-K3TestTask.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-K3TestTask.debug.xcconfig"; path = "Pods/Target Support Files/Pods-K3TestTask/Pods-K3TestTask.debug.xcconfig"; sourceTree = "<group>"; };
+		99283170D55644B4344A6E0F /* Pods-K3TestTask.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-K3TestTask.release.xcconfig"; path = "Pods/Target Support Files/Pods-K3TestTask/Pods-K3TestTask.release.xcconfig"; sourceTree = "<group>"; };
+		E6CF42C90E2688F40D55AD5D /* Pods_K3TestTask.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_K3TestTask.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -29,17 +43,28 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				42FE3E833C0A69E4B25ADB8D /* Pods_K3TestTask.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		142D7D0DB3535A63A69426F6 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				E6CF42C90E2688F40D55AD5D /* Pods_K3TestTask.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		340CCED3224CE88000BBEFCD = {
 			isa = PBXGroup;
 			children = (
 				340CCEDE224CE88000BBEFCD /* K3TestTask */,
 				340CCEDD224CE88000BBEFCD /* Products */,
+				8D9C51C5614DB34FDAD22264 /* Pods */,
+				142D7D0DB3535A63A69426F6 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -54,14 +79,76 @@
 		340CCEDE224CE88000BBEFCD /* K3TestTask */ = {
 			isa = PBXGroup;
 			children = (
-				340CCEDF224CE88000BBEFCD /* AppDelegate.swift */,
-				340CCEE1224CE88000BBEFCD /* ViewController.swift */,
-				340CCEE3224CE88100BBEFCD /* Main.storyboard */,
+				340CCEF1224CE90A00BBEFCD /* AppDelegate */,
+				340CCEF5224CE94400BBEFCD /* Controllers */,
+				340CCEF4224CE93700BBEFCD /* ViewModels */,
+				340CCEF3224CE92600BBEFCD /* Views */,
+				340CCEF2224CE91B00BBEFCD /* Models */,
+				340CCEF6224D0E3700BBEFCD /* Utilities */,
 				340CCEE6224CE88400BBEFCD /* Assets.xcassets */,
-				340CCEE8224CE88400BBEFCD /* LaunchScreen.storyboard */,
 				340CCEEB224CE88400BBEFCD /* Info.plist */,
 			);
 			path = K3TestTask;
+			sourceTree = "<group>";
+		};
+		340CCEF1224CE90A00BBEFCD /* AppDelegate */ = {
+			isa = PBXGroup;
+			children = (
+				340CCEDF224CE88000BBEFCD /* AppDelegate.swift */,
+			);
+			path = AppDelegate;
+			sourceTree = "<group>";
+		};
+		340CCEF2224CE91B00BBEFCD /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				340CCEFB224D250400BBEFCD /* TumblrResponse.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		340CCEF3224CE92600BBEFCD /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				340CCEE3224CE88100BBEFCD /* Main.storyboard */,
+				340CCEE8224CE88400BBEFCD /* LaunchScreen.storyboard */,
+				340CCEF7224D0ED800BBEFCD /* PostTableViewCell.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		340CCEF4224CE93700BBEFCD /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				340CCEFD224D380700BBEFCD /* Post.swift */,
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		340CCEF5224CE94400BBEFCD /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				340CCEE1224CE88000BBEFCD /* ViewController.swift */,
+				340CCEFF22528A9E00BBEFCD /* DetailViewController.swift */,
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
+		340CCEF6224D0E3700BBEFCD /* Utilities */ = {
+			isa = PBXGroup;
+			children = (
+				340CCEF9224D16D300BBEFCD /* APIManager.swift */,
+			);
+			path = Utilities;
+			sourceTree = "<group>";
+		};
+		8D9C51C5614DB34FDAD22264 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				91CB4F13467071D708A5373B /* Pods-K3TestTask.debug.xcconfig */,
+				99283170D55644B4344A6E0F /* Pods-K3TestTask.release.xcconfig */,
+			);
+			name = Pods;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -71,9 +158,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 340CCEEE224CE88400BBEFCD /* Build configuration list for PBXNativeTarget "K3TestTask" */;
 			buildPhases = (
+				E014BA95B8B96B0748BF6322 /* [CP] Check Pods Manifest.lock */,
 				340CCED8224CE88000BBEFCD /* Sources */,
 				340CCED9224CE88000BBEFCD /* Frameworks */,
 				340CCEDA224CE88000BBEFCD /* Resources */,
+				4B01E31AE77B0B41EA9C4FA3 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -130,13 +219,65 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		4B01E31AE77B0B41EA9C4FA3 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-K3TestTask/Pods-K3TestTask-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/SDWebImage/SDWebImage.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SDWebImage.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-K3TestTask/Pods-K3TestTask-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		E014BA95B8B96B0748BF6322 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-K3TestTask-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		340CCED8224CE88000BBEFCD /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				340CCEFA224D16D300BBEFCD /* APIManager.swift in Sources */,
+				340CCEFC224D250400BBEFCD /* TumblrResponse.swift in Sources */,
 				340CCEE2224CE88000BBEFCD /* ViewController.swift in Sources */,
+				340CCEFE224D380700BBEFCD /* Post.swift in Sources */,
 				340CCEE0224CE88000BBEFCD /* AppDelegate.swift in Sources */,
+				340CCEF8224D0ED800BBEFCD /* PostTableViewCell.swift in Sources */,
+				340CCF0022528A9E00BBEFCD /* DetailViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -280,6 +421,7 @@
 		};
 		340CCEEF224CE88400BBEFCD /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 91CB4F13467071D708A5373B /* Pods-K3TestTask.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -298,6 +440,7 @@
 		};
 		340CCEF0224CE88400BBEFCD /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 99283170D55644B4344A6E0F /* Pods-K3TestTask.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;

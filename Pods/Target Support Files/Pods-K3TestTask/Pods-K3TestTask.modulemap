@@ -1,0 +1,6 @@
+framework module Pods_K3TestTask {
+  umbrella header "Pods-K3TestTask-umbrella.h"
+
+  export *
+  module * { export * }
+}
