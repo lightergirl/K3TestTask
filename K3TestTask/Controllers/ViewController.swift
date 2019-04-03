@@ -15,6 +15,8 @@ class ViewController: UIViewController {
     let apiManager = APIManager()
     var timestamp: Int?
     var posts: [Post] = []
+    var detailPost: DetailPost?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // setup searchbar
@@ -26,7 +28,7 @@ class ViewController: UIViewController {
         tableView.estimatedRowHeight = 600
         tableView.isHidden = true
         
-        NotificationCenter.default.addObserver(self, selector: #selector(onDidReceiveData(_:)), name: Notification.Name("didReceiveData"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(onDidReceiveData(_:)), name: .didReceiveData, object: nil)
 
     }
     
@@ -63,8 +65,8 @@ class ViewController: UIViewController {
             self.timestamp = item.timestamp
         }
         if !response.isEmpty {
-            NotificationCenter.default.post(name: Notification.Name("didReceiveData"), object: nil)
-        } else {
+            NotificationCenter.default.post(name: .didReceiveData, object: nil)
+        } else if posts.isEmpty{
             DispatchQueue.main.async {
                 self.tableView.isHidden = true
             }
@@ -72,12 +74,9 @@ class ViewController: UIViewController {
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "detailSegue", let index = sender as? Int {
+        if segue.identifier == "detailSegue" {
             let destVC = segue.destination as! DetailViewController
-            destVC.image = self.posts[index].imageUrl
-            destVC.imageHeight = self.posts[index].imageHeight
-            destVC.blogName = self.posts[index].blogName
-            destVC.type = self.posts[index].type
+            destVC.detailPost = self.detailPost
         }
     }
 }
@@ -102,7 +101,8 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
         cell.imageHeightConstraint.constant = posts[indexPath.row].imageHeight
         view.layoutIfNeeded()
         cell.readButtonHandler = {
-            self.performSegue(withIdentifier: "detailSegue", sender: indexPath.row)
+            self.detailPost = DetailPost.init(with: self.posts[indexPath.row])
+            self.performSegue(withIdentifier: "detailSegue", sender: nil)
         }
         return cell
     }
@@ -137,6 +137,7 @@ extension ViewController: UISearchBarDelegate {
             self.tableView.isHidden = true
         }
         tableView.reloadData()
+        
         searchBar.resignFirstResponder()
         initTimestamp()
         performSearch()
@@ -144,6 +145,6 @@ extension ViewController: UISearchBarDelegate {
     func initTimestamp() {
         let date = Date()
         let timeInterval = date.timeIntervalSince1970
-        timestamp = Int(timeInterval)
+        self.timestamp = Int(timeInterval)
     }
 }

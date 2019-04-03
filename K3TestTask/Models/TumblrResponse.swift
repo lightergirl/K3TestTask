@@ -24,7 +24,8 @@ struct Response: Codable {
     let blog: ResponseBlog
     let id: Int
     let postURL: String
-    let slug, date: String
+    let slug: String
+    let date: String
     let timestamp: Int
     let state: String
     let format: String
@@ -32,9 +33,11 @@ struct Response: Codable {
     let tags: [String]
     let shortURL: String
     let summary: String
-    let bookmarklet, mobile: Bool?
+    let bookmarklet: Bool?
+    let mobile: Bool?
     let shouldOpenInLegacy: Bool
-    let recommendedSource, recommendedColor: String?
+    let recommendedSource: String?
+    let recommendedColor: String?
     let featuredInTag: [String]?
     let featuredTimestamp: Int?
     let noteCount: Int
@@ -43,39 +46,53 @@ struct Response: Codable {
     let trail: [Trail]?
     let photosetLayout: String?
     let photos: [Photo]?
-    let canLike, canReblog, canSendInMessage, canReply: Bool
+    let canLike: Bool
+    let canReblog: Bool
+    let canSendInMessage: Bool
+    let canReply: Bool
     let displayAvatar: Bool
     let imagePermalink: String?
     let sourceURL: String?
     let sourceTitle: String?
     let linkURL: String?
-    let isAnonymous, isSubmission: Bool?
+    let isAnonymous: Bool?
+    let isSubmission: Bool?
     let title: String?
     let body: String?
     let permalinkURL: String?
     let html5Capable: Bool?
     let thumbnailURL: String?
-    let thumbnailWidth, thumbnailHeight: Int?
+    let thumbnailWidth: Int?
+    let thumbnailHeight: Int?
     let player: PlayerUnion?
     let videoType: String?
     let video: Video?
-    let text, source: String?
+    let text: String?
+    let source: String?
     let trackName: String?
     let albumArt: String?
     let embed: String?
     let plays: Int?
-    let audioURL, audioSourceURL: String?
+    let audioURL: String?
+    let audioSourceURL: String?
     let isExternal: Bool?
     let audioType: String?
     
     enum CodingKeys: String, CodingKey {
         case type
         case blogName = "blog_name"
-        case blog, id
+        case blog
+        case id
         case postURL = "post_url"
-        case slug, date, timestamp, state, format
+        case slug
+        case date
+        case timestamp
+        case state
+        case format
         case reblogKey = "reblog_key"
-        case tags, bookmarklet, mobile
+        case tags
+        case bookmarklet
+        case mobile
         case shortURL = "short_url"
         case summary
         case shouldOpenInLegacy = "should_open_in_legacy"
@@ -84,7 +101,11 @@ struct Response: Codable {
         case featuredInTag = "featured_in_tag"
         case featuredTimestamp = "featured_timestamp"
         case noteCount = "note_count"
-        case title, body, caption, reblog, trail
+        case title
+        case body
+        case caption
+        case reblog
+        case trail
         case photosetLayout = "photoset_layout"
         case photos
         case canLike = "can_like"
@@ -106,10 +127,12 @@ struct Response: Codable {
         case player
         case videoType = "video_type"
         case video
-        case text, source
+        case text
+        case source
         case trackName = "track_name"
         case albumArt = "album_art"
-        case embed, plays
+        case embed
+        case plays
         case audioURL = "audio_url"
         case audioSourceURL = "audio_source_url"
         case isExternal = "is_external"
@@ -129,7 +152,9 @@ enum TypeEnum: String, Codable {
 }
 
 struct ResponseBlog: Codable {
-    let name, title, description: String
+    let name: String
+    let title: String
+    let description: String
     let url: String
     let uuid: String
     let updated: Int
@@ -165,11 +190,39 @@ enum PlayerUnion: Codable {
 
 struct Player: Codable {
     let width: Int
-    let embedCode: String
+    let embedCode: EmbedCode
     
     enum CodingKeys: String, CodingKey {
         case width
         case embedCode = "embed_code"
+    }
+}
+
+enum EmbedCode: Codable {
+    case bool(Bool)
+    case string(String)
+    
+    init(from decoder: Decoder) throws {
+        let container = try decoder.singleValueContainer()
+        if let x = try? container.decode(Bool.self) {
+            self = .bool(x)
+            return
+        }
+        if let x = try? container.decode(String.self) {
+            self = .string(x)
+            return
+        }
+        throw DecodingError.typeMismatch(EmbedCode.self, DecodingError.Context(codingPath: decoder.codingPath, debugDescription: "Wrong type for EmbedCode"))
+    }
+    
+    func encode(to encoder: Encoder) throws {
+        var container = encoder.singleValueContainer()
+        switch self {
+        case .bool(let x):
+            try container.encode(x)
+        case .string(let x):
+            try container.encode(x)
+        }
     }
 }
 
@@ -179,18 +232,20 @@ struct Video: Codable {
 
 struct Youtube: Codable {
     let videoID: String
-    let width, height: Int
+    let width: Int
+    let height: Int
     
     enum CodingKeys: String, CodingKey {
         case videoID = "video_id"
-        case width, height
+        case width
+        case height
     }
 }
 
 struct Photo: Codable {
     let caption: String
     let originalSize: Size
-    let altSizes: [Size]
+    let altSizes: [Size]?
     let exif: Exif?
     
     enum CodingKeys: String, CodingKey {
@@ -203,7 +258,8 @@ struct Photo: Codable {
 
 struct Size: Codable {
     let url: String
-    let width, height: Int
+    let width: Int
+    let height: Int
 }
 
 struct Exif: Codable {
@@ -215,7 +271,8 @@ struct Exif: Codable {
 }
 
 struct Reblog: Codable {
-    let comment, treeHTML: String
+    let comment: String
+    let treeHTML: String
     
     enum CodingKeys: String, CodingKey {
         case comment
@@ -226,11 +283,14 @@ struct Reblog: Codable {
 struct Trail: Codable {
     let blog: TrailBlog
     let post: PostInfo
-    let contentRaw, content: String
-    let isCurrentItem, isRootItem: Bool
+    let contentRaw: String
+    let content: String
+    let isCurrentItem: Bool
+    let isRootItem: Bool
     
     enum CodingKeys: String, CodingKey {
-        case blog, post
+        case blog
+        case post
         case contentRaw = "content_raw"
         case content
         case isCurrentItem = "is_current_item"
@@ -242,10 +302,14 @@ struct TrailBlog: Codable {
     let name: String
     let active: Bool
     let theme: Theme
-    let shareLikes, shareFollowing, canBeFollowed: Bool
+    let shareLikes: Bool
+    let shareFollowing: Bool
+    let canBeFollowed: Bool
     
     enum CodingKeys: String, CodingKey {
-        case name, active, theme
+        case name
+        case active
+        case theme
         case shareLikes = "share_likes"
         case shareFollowing = "share_following"
         case canBeFollowed = "can_be_followed"
@@ -253,15 +317,23 @@ struct TrailBlog: Codable {
 }
 
 struct Theme: Codable {
-    let headerFullWidth, headerFullHeight, headerFocusWidth, headerFocusHeight: Int?
+    let headerFullWidth: Int?
+    let headerFullHeight: Int?
+    let headerFocusWidth: Int?
+    let headerFocusHeight: Int?
     let avatarShape: String
     let backgroundColor: String
     let bodyFont: String
     let headerBounds: HeaderBounds
-    let headerImage, headerImageFocused, headerImageScaled: String
+    let headerImage: String
+    let headerImageFocused: String
+    let headerImageScaled: String
     let headerStretch: Bool
     let linkColor: String
-    let showAvatar, showDescription, showHeaderImage, showTitle: Bool
+    let showAvatar: Bool
+    let showDescription: Bool
+    let showHeaderImage: Bool
+    let showTitle: Bool
     let titleColor: String
     let titleFont: String
     let titleFontWeight: String

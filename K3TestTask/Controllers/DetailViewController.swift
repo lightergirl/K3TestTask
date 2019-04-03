@@ -9,14 +9,11 @@
 import UIKit
 
 class DetailViewController: UIViewController {
-    var image: String?
-    var imageHeight: CGFloat?
-    var type: ContentType?
-    var blogName: String?
     @IBOutlet weak var blogNameLabel: UILabel!
     @IBOutlet weak var sorryLabel: UILabel!
     @IBOutlet weak var contentImage: UIImageView!
     @IBOutlet weak var imaheHeightConstraint: NSLayoutConstraint!
+    var detailPost: DetailPost?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -24,12 +21,12 @@ class DetailViewController: UIViewController {
     }
     
     func setupView() {
-        guard let type = type, let imageHeight = imageHeight, let blogName = blogName else { return }
+        guard let detail = detailPost, let type = detail.type, let imageHeight = detail.imageHeight, let blogName = detail.blogName else { return }
         blogNameLabel.text = blogName
         switch type {
         case .photo:
             sorryLabel.isHidden = true
-            if let imageUrl = image {
+            if let imageUrl = detail.image {
                 contentImage.sd_setImage(with: URL(string: imageUrl), placeholderImage: UIImage(named: "no_image_available.jpeg"))
             } else {
                 contentImage.image = UIImage(named: "no_image_available.jpeg")

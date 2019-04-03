@@ -29,7 +29,7 @@ class APIManager {
             }
             if  let data = data,
                 let dataString = String(data: data, encoding: .utf8) {
-//                print("get(): Echo Responce: \(dataString)")
+                print("get(): Echo Responce: \(dataString)")
                 handler(data, nil)
             }
         }
